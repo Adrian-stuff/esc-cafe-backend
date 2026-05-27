@@ -41,7 +41,7 @@ router.put('/:id/status', protect, adminOnly, async (req, res) => {
   try {
     const { orderStatus } = req.body;
     const update = { orderStatus };
-    if (orderStatus === 'completed') {
+    if (orderStatus === 'confirmed' || orderStatus === 'completed') {
       update.paymentStatus = 'paid';
     }
     const order = await Order.findByIdAndUpdate(req.params.id, update, { new: true });
